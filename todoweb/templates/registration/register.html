@@ -1,0 +1,33 @@
+{% extends "todoweb/base.html" %} {% block content %}
+<form method="post" class="form-group">
+{% csrf_token %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="post login">
+                <div class="text nform">
+                    <h2 class="title">Registrar >></h2>
+                    <div class="crispy">
+                        {{ form.as_p }}
+                    </div>
+                    <input type="submit" value="Registrarse" />
+                </div>
+                <div class="floatFix"></div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

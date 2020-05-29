@@ -29,18 +29,18 @@
             </div>
         </div>
         <hr />
-        <a class="btn btn-default addcomment" href="/activity_add/{{list.pk}}">¡Agregar algo que hacer!</a>
+        <a class="btn btn-default addcomment" href="/list/{{list.pk}}/activity/add/">¡Agregar algo que hacer!</a>
         {% for activity in list.activities_notdone.all %}
         <div id="comment{{activity.pk}}" class="comment">
 
             <div class="hcomment">
             
             
-            <a class="btn btn-default" href="/activity_remove/{{activity.pk}}"
+            <a class="btn btn-default" href="{% url 'activity_remove' pk=activity.pk %}"
             ><span class="glyphicon glyphicon-remove"></span
             ></a>
             
-            <a class="btn btn-default" href="/activity_done/{{activity.pk}}"
+            <a class="btn btn-default" href="{% url 'activity_done' pk=activity.pk %}"
             ><span class="glyphicon glyphicon-ok"></span
             ></a>
             
@@ -50,7 +50,7 @@
             <div class="activities">
                 <strong>{{ activity.title }}</strong>
                 <div>{{ activity.description|linebreaks }}</div>
-                <div class="date author">{{ activity.created_date }}</div>
+                
             </div>
         </div>
             {% empty %}

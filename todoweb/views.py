@@ -68,3 +68,43 @@ def list_remove(request, pk):
     list = get_object_or_404(List, pk=pk)
     list.delete()
     return redirect('lists')
+
+
+@login_required
+def add_activity(request, pk):
+    list = get_object_or_404(List, pk=pk)
+    if request.method == "POST":
+        form = ActivityForm(request.POST)
+        if form.is_valid():
+            activity = form.save(commit=False)
+            activity.idList = list
+            activity.save()
+            return redirect('list_detail', pk=list.pk)
+    else:
+        form = ActivityForm()
+    return render(request, 'todoweb/add_activity.html', {'form': form})
+
+
+@login_required
+def activity_done(request, pk):
+    activity = get_object_or_404(Activity, pk=pk)
+    activity.complete()
+    return redirect('list_detail', pk=activity.idList.pk)
+
+
+@login_required
+def activity_remove(request, pk):
+    activity = get_object_or_404(Activity, pk=pk)
+    activity.delete()
+    return redirect('list_detail', pk=activity.idList.pk)
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+    else:
+        form = RegisterForm()
+    return render(request, "registration/register.html", {"form": form})
