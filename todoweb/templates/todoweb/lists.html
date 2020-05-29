@@ -2,15 +2,31 @@
 {% block content %}
                 <div class="row">
                     <div class="col-md-12">
-                        {% for list in lists %}
-                        <div class="post">
-                            <h2 class="title"><a href="/list_detail">{{list.name}}</a> >></h2>
-                    
-                            <div class="author">
-                                {{ list.activities.count }}
+                        {% if user.is_authenticated %}
+                            {% for list in lists %}
+                            <div class="post">
+                                <h2 class="title"><a href="/list_detail">{{list.name}}</a> >>  </h2>
+
+                                <div class="text">
+                                    <ul class="infoact">
+                                        <li>
+                                            Cosas Hechas: {{ list.activities_done.count }}
+                                        </li>
+                                        <li>
+                                            Cosas por Hacer: {{ list.activities_notdone.count }}
+                                        </li>
+                                    </ul>
+                                    <div class="whatd">
+                                        Que debería hacer? {{ list.activities_todo.title }}
+                                    </div>
+                                </div>
+
+                                <div class="author">
+                                    # de Cosas por Hacer: {{ list.activities.count }}
+                                </div>
                             </div>
-                        </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
 {% endblock %}

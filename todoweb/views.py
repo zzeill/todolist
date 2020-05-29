@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def lists(request):
-    lists = List.objects.order_by('-id')
+    lists = List.objects.filter(idUser=request.user).order_by('-id')
     return render(request, 'todoweb/lists.html', {'lists' : lists})

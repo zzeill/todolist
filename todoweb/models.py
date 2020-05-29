@@ -6,8 +6,14 @@ class List(models.Model):
     idUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
-    def list_activities(self):
+    def activities_done(self):
         return self.activities.filter(done=True)
+
+    def activities_notdone(self):
+        return self.activities.filter(done=False)
+
+    def activities_todo(self):
+        return self.activities.filter(done=False).first()
 
     def __str__(self):
         return self.name
