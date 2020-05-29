@@ -1,0 +1,28 @@
+{% extends 'todoweb/base.html' %}
+{% block content %}
+    <form method="POST" class="post-form">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-8">
+                <div class="post">
+                    
+                   
+                    <h2 class="title">
+                        {% if edit %}
+                        Editar lista >>
+                        {% else %}
+                        Crear nueva lista >>
+                        {% endif %}
+                    </h2>
+                    
+                    <div class="text nform">
+                        {{ form.as_p }}
+                    </div>
+                    <div class="author fform">
+                        <button type="submit" class="save btn btn-default">Guardar</button>
+                    </div>
+                </div>
+          
+            </div>
+        </div>
+    </form>
+{% endblock %}
