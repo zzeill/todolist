@@ -61,3 +61,10 @@ def list_edit(request, pk):
     else:
         form = ListForm(instance=list)
         return render(request, 'todoweb/list_edit.html', {'form': form, 'edit' : 'edit'})
+
+
+@login_required
+def list_remove(request, pk):
+    list = get_object_or_404(List, pk=pk)
+    list.delete()
+    return redirect('lists')
