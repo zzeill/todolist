@@ -11,3 +11,8 @@ from django.contrib.auth.decorators import login_required
 def lists(request):
     lists = List.objects.filter(idUser=request.user).order_by('-id')
     return render(request, 'todoweb/lists.html', {'lists' : lists})
+
+@login_required
+def list_detail(request, pk):
+    list = get_object_or_404(List, pk=pk)
+    return render(request, 'todoweb/list_detail.html', {'list': list})

@@ -5,7 +5,7 @@
                         {% if user.is_authenticated %}
                             {% for list in lists %}
                             <div class="post">
-                                <h2 class="title"><a href="/list_detail">{{list.name}}</a> >>  </h2>
+                                <h2 class="title"><a href="/list/{{list.pk}}">{{list.name}}</a> >>  </h2>
 
                                 <div class="text">
                                     <ul class="infoact">
