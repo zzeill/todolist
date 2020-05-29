@@ -1,0 +1,16 @@
+{% extends 'todoweb/base.html' %}
+{% block content %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {% for list in lists %}
+                        <div class="post">
+                            <h2 class="title"><a href="/list_detail">{{list.name}}</a> >></h2>
+                    
+                            <div class="author">
+                                {{ list.activities.count }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+{% endblock %}

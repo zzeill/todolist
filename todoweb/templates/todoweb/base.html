@@ -1,0 +1,60 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            TODO ~ Lista lo que necesitas hacer y ¡hazlo!
+        </title>
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet"> 
+
+    </head>
+    <body>
+        <div id="container">
+            <div id="topMenu">
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/admin">Admin</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="/list_new" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                    </li>
+                    <li class="right">
+                        <a href="/logout">Salir</a>
+                    </li>
+                    <li class="right">
+                        <a>{{ user.username }}</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="/login" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="floatFix"></div>
+            <div id="content">
+                <div class="post page-header">
+                    <h2>
+                        TODO ~ ¡Haz lo que debes hacer!
+                    </h2>
+                    <p>
+                        ¡Desarrollado en Django/Python y con un toque de Bootstrap!
+                    </p>
+                </div>
+
+                {% block content %}
+                {% endblock %}
+                
+            </div>
+        </div>
+        
+    </body>
+</html>
