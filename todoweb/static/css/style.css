@@ -171,6 +171,12 @@ padding:3px;
     padding:12px 5px 5px 5px;
 }
 
+.registerNotice2 {
+    margin-top:20px;
+    background:rgb(241, 250, 119);
+    padding:12px 5px 5px 5px;
+}
+
 .noList {
     color: #fa7f2d;
     font-size:1.8em;
