@@ -1,29 +1,72 @@
 {% extends 'todoweb/base.html' %}
 {% block content %}
                 <div class="row">
+                    
                     <div class="col-md-12">
+                        <h2 class="title cout">Tus Listas</a>  </h2>
                         {% if user.is_authenticated %}
                             {% for list in lists %}
                             <div class="post">
-                                <h2 class="title"><a href="/list/{{list.pk}}">{{list.name}}</a> >>  </h2>
+                                {% if user.is_authenticated %}
+                                <a class="btn btn-default borrar" href="/list/{{list.pk}}/delete/"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="btn btn-default editar" href="/list/{{list.pk}}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                {% endif %}
+                                <h2 class="title"><a href="/list/{{list.pk}}">{{list.name}}</a> >></h2>
+            
+            <div class="text">
 
-                                <div class="text">
-                                    <ul class="infoact">
-                                        <li>
-                                            Cosas Hechas: {{ list.activities_done.count }}
-                                        </li>
-                                        <li>
-                                            Cosas por Hacer: {{ list.activities_notdone.count }}
-                                        </li>
-                                    </ul>
-                                    <div class="whatd">
-                                        Que debería hacer? {{ list.activities_todo.title }}
-                                    </div>
-                                </div>
+                {% if list.activities.count %}
+                <div class="stats">
+                    <h2 class="title">Estadísticas</h2>
+                    <ul class="infoact">
+                        <li>
+                            Cosas Hechas <span>{{ list.activities_done.count }}</span>
+                        </li>
+                        <li>
+                            Cosas por Hacer <span>{{ list.activities_notdone.count }}</span>
+                        </li>
+                    </ul>
+
+                    {% if list.activities_notdone.count %}
+                    <div class="whatd">
+                        ¿No sabes qué hacer? Podrías empezar con: 
+                        <span>{{ list.activities_todo.title }}</span>
+                    </div>
+                    {% else %}
+                    <div class="whatd">
+                        <span>Ya hiciste todo, ¡Muy buen trabajo!</span>
+                    </div>
+                    {% endif %}
+                    
+                </div>
+
+                <div class="floatFix"></div>
+                
+
+                {% else %}
+
+                    <span class="noList">¡No haz agregado ningún pendiente!</span>
+                    Da click en el botón <b>¡Agregar algo que hacer!</b> arriba de este mensaje para empezar a crear tu lista de pendientes.
+           
+                {% endif %}
+
+
+            </div>
 
                                 <div class="author">
                                     # de Cosas por Hacer: {{ list.activities.count }}
                                 </div>
+                            </div>
+                            {% empty %}
+                            <div class="post">
+                                <h2 class="title"><a href="/list/new/">¡Bienvenido!</a> >>  </h2>
+
+                                <div class="text">
+                                    <span class="noList">¡No haz creado ninguna lista de cosas por hacer!</span>
+                                    Para comenzar a dar seguimiento a tus pendientes, empieza por crear una nueva lista dando click en el botón [+] que se encuentra en la parte superior izquierda.
+                                </div>
+
+                                
                             </div>
                             {% endfor %}
                         {% endif %}

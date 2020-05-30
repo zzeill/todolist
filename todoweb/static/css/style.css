@@ -50,6 +50,7 @@ min-height:20px;
 #content {
     padding:10px;
     background:#80ced6;
+    padding-bottom:30px;
 }
 
 .post {
@@ -148,7 +149,8 @@ padding:3px;
     background:lightblue;
     padding:10px;
     border: 1px dotted gray;
-    margin-bottom:20px;
+    margin-bottom:5px;
+    cursor: pointer;
 }
 
 .comment .author {
@@ -168,3 +170,126 @@ padding:3px;
     background:rgb(160, 255, 176);
     padding:12px 5px 5px 5px;
 }
+
+.noList {
+    color: #fa7f2d;
+    font-size:1.8em;
+    text-align:center;
+    display:block;
+    padding-bottom:10px;
+}
+
+.newList {
+    float:right;
+    padding-right:45px;
+}
+
+.instructions {
+    font-size:1.35em;
+    color: #1a1919
+}
+
+.title.cout {
+    font-size:2.4em;
+    color: rgb(255, 30, 30);
+}
+
+.addcomment.listdetail {
+    margin:10px 0px 20px 0px;
+    box-shadow: 2px 3px #888888;
+    text-shadow: 2px 2px 4px rgb(19, 16, 16);
+    font-weight:0;
+}
+
+.stats ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size:0.8em;
+  }
+
+  .stats ul li {
+      background:#EEEEEE;
+      padding:4px;
+      display:block;
+      width:140px;
+      height:65px;
+      color:#333333;
+      float:left;
+      border-radius: 0px 10px 10px 0px;
+  }
+
+  .stats ul li:first-child {
+    border-radius: 10px 0 0 10px;
+    border-right:1px dotted #888;
+  }
+
+  .stats ul span {
+      display:block;
+      text-align:center;
+      font-size:2.4em;
+      font-weight: bold;
+  }
+
+  .whatd {
+      float:left;
+      padding-left:20px;
+      font-size:1.2em;
+      max-width:740px;
+      color: #f87823
+  }
+
+  .whatd span {
+      display:block;
+      font-weight:bold;
+      font-size:1.2em;
+      text-align:center;
+      color:#4a755d
+  }
+
+  .activities {
+      line-height:25px;
+      padding-left:50px;
+      font-size:1.2em;
+  }
+
+
+  .activities div {
+      display:none;
+  }
+
+  .comment:hover .activities div {
+    display:block;
+    line-height:15px;
+    margin-right:50px;
+    padding:10px 10px 0px 3px;
+    padding-bottom:0;
+}
+
+  .actdone {
+      float:left;
+  }
+
+  .title.cout.listdetail {
+      padding:0;
+  }
+
+  .actInst {
+      font-size:1.1em;
+      padding-bottom:10px;
+  }
+
+  .actInst ul {
+      margin:0;
+      padding:0;
+      padding-left:30px;
+      list-style-type: square;
+  }
+
+  .ldone {
+      margin-top:20px;
+  }
+
+  .activities.finished {
+    text-decoration: line-through;
+  }

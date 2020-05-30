@@ -1,5 +1,7 @@
 {% extends "todoweb/base.html" %} {% block content %} {% if form.errors %}
-<p>Usuario incorrecto, vuelva a intentarlo.</p>
+<div class="alert alert-danger">
+    <strong>Usuario incorrecto, por favor vuelva a intentarlo.</strong>
+</div>
 {% endif %}
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}

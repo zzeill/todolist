@@ -2,6 +2,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
+        <a class="btn btn-default addcomment listdetail btn btn-success" href="/list/{{list.pk}}/activity/add/">¡Agregar algo que hacer!</a>
         <div class="post">
             {% if user.is_authenticated %}
             <a class="btn btn-default borrar" href="/list/{{list.pk}}/delete/"><span class="glyphicon glyphicon-remove"></span></a>
@@ -10,41 +11,75 @@
             <h2 class="title"><a href="/list/{{list.pk}}">{{list.name}}</a> >></h2>
             
             <div class="text">
-                <ul class="infoact">
-                    <li>
-                        Cosas Hechas: {{ list.activities_done.count }}
-                    </li>
-                    <li>
-                        Cosas por Hacer: {{ list.activities_notdone.count }}
-                    </li>
-                </ul>
-                <div class="whatd">
-                    Que debería hacer? {{ list.activities_todo.title }}
+
+                {% if list.activities.count %}
+                <div class="stats">
+                    <h2 class="title">Estadísticas</h2>
+                    <ul class="infoact">
+                        <li>
+                            Cosas Hechas <span>{{ list.activities_done.count }}</span>
+                        </li>
+                        <li>
+                            Cosas por Hacer <span>{{ list.activities_notdone.count }}</span>
+                        </li>
+                    </ul>
+
+                    {% if list.activities_notdone.count %}
+                    <div class="whatd">
+                        ¿No sabes qué hacer? Podrías empezar con: 
+                        <span>{{ list.activities_todo.title }}</span>
+                    </div>
+                    {% else %}
+                    <div class="whatd">
+                        <span>Ya hiciste todo, ¡Muy buen trabajo!</span>
+                    </div>
+                    {% endif %}
+                    
                 </div>
+
+                <div class="floatFix"></div>
+                
+
+                {% else %}
+
+                    <span class="noList">¡No haz agregado ningún pendiente!</span>
+                    Da click en el botón <b>¡Agregar algo que hacer!</b> arriba de este mensaje para empezar a crear tu lista de pendientes.
+           
+                {% endif %}
+
+
             </div>
             <div class="author">
                 
-                # de Cosas por Hacer: {{ list.activities.count }}
+                # Total de actividades: {{ list.activities.count }}
                 
             </div>
         </div>
-        <hr />
-        <a class="btn btn-default addcomment" href="/list/{{list.pk}}/activity/add/">¡Agregar algo que hacer!</a>
+
+        <h2 class="title cout listdetail">Pendientes</h2>
+
+        <div class="actInst">
+            <ul>
+                <li>Sí ya terminaste una actividad, da click en la palomita para completarla.</li>
+                <li>Puedes ver la descripción dando click o pasando el cursor sobre ella.</li>
+            </ul>
+        </div>
+       
         {% for activity in list.activities_notdone.all %}
         <div id="comment{{activity.pk}}" class="comment">
 
             <div class="hcomment">
             
+                <a class="btn btn-default" href="{% url 'activity_remove' pk=activity.pk %}"
+                ><span class="glyphicon glyphicon-remove"></span
+                ></a>
             
-            <a class="btn btn-default" href="{% url 'activity_remove' pk=activity.pk %}"
-            ><span class="glyphicon glyphicon-remove"></span
-            ></a>
-            
-            <a class="btn btn-default" href="{% url 'activity_done' pk=activity.pk %}"
-            ><span class="glyphicon glyphicon-ok"></span
-            ></a>
-            
-            
+            </div>
+
+            <div class="actdone">
+                <a class="btn btn-default" href="{% url 'activity_done' pk=activity.pk %}"
+                ><span class="glyphicon glyphicon-ok"></span
+                ></a>
             </div>
             
             <div class="activities">
@@ -53,8 +88,39 @@
                 
             </div>
         </div>
-            {% empty %}
-            <p>Sin cosas por hacer :( ¡agregar una nueva! </p>
+        {% empty %}
+        <div class="comment">
+            No tienes ningún pendiente, <b>¡Hurray!</b>
+        </div>
+        {% endfor %}
+
+        <h2 class="title cout listdetail ldone">Completadas</h2>
+
+        <div class="actInst">
+            <ul>
+                <li>Puedes eliminarlas dando click en la <b>X</b> si ya no deseas verlas.</li>
+            </ul>
+        </div>
+       
+        {% for activity in list.activities_done.all %}
+        <div id="comment{{activity.pk}}" class="comment">
+
+            <div class="actdone">
+                <a class="btn btn-default" href="{% url 'activity_remove' pk=activity.pk %}"
+                ><span class="glyphicon glyphicon-remove"></span
+                ></a>
+            </div>
+            
+            <div class="activities finished">
+                <strong>{{ activity.title }}</strong>
+                <div>{{ activity.description|linebreaks }}</div>
+                
+            </div>
+        </div>
+        {% empty %}
+        <div class="comment">
+            No haz completado ninguna actividad, empieza a hacerlas <b>¡Ya!</b>
+        </div>
         {% endfor %}
     </div>
 </div>

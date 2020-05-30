@@ -2,7 +2,15 @@
 {% block content %}
     <form method="POST" class="post-form">{% csrf_token %}
         <div class="row">
+            <div class="col-md-4 instructions newList">
+                {% if edit %}
+                Sí el nombre actual no es de tu agrado, cámbialo por uno más interesante!
+                {% else %}
+                Para crear una lista sólo es necesario un nombre, se recomienda uno representativo de las cosas pendientes que pondrás en ella, pero puedes colocar lo que quieras!
+                {% endif %}
+            </div>
             <div class="col-md-8">
+                
                 <div class="post">
                     
                    
@@ -21,6 +29,8 @@
                         <button type="submit" class="save btn btn-default">Guardar</button>
                     </div>
                 </div>
+
+                
           
             </div>
         </div>

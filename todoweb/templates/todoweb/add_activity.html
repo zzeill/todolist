@@ -3,6 +3,10 @@
 
     <form method="POST" class="post-form">{% csrf_token %}
         <div class="row">
+            <div class="col-md-4 instructions newList">
+                El título se utiliza como referencia y siempre es visible en la lista en todo momento, ¡Intenta ser creativo! <br/><br/>
+                La descripción sólo se muestra cuando se da click sobre la actividad, así que no te preocupes mucho por ella, ¡No pasa nada!
+            </div>
             <div class="col-md-8">
                 <div class="post">
                     <h2 class="title">Agregar un pendiente >></h2>
